@@ -14,10 +14,10 @@ The database system has three types of users: `user`, `securityOfficer`, `admini
 - `securityOfficer`: Manges users and passwords. Also, they perform backup and recovery operations.
 - `administrator`: Perform the tasks of all the above.
 
-### [`Object`](./lib/object.dart) and [`Subject`](./lib/subject.dart)
+### [`AcmObject`](./lib/object.dart) and [`AcmSubject`](./lib/subject.dart)
 
-The `Subject` class inherits all of the methods and fields of the `Object` class. There are two fields that are added the `Subject` class to differentiate it: `id` and `role` (*described later*).
+The `AcmSubject` class inherits all of the methods and fields of the `AcmObject` class. There are two fields that are added the `AcmSubject` class to differentiate it: `id` and `role` (*described later*).
 
 ### [`AccessControlMatrix`](./lib/access_control_matrix.dart)
 
-The `AccessControlMatrix` class is used to control and manage the `Subject`s and `Object`s.
+The `AccessControlMatrix` class is used to control and manage the `AcmSubject`s and `AcmObject`s.
