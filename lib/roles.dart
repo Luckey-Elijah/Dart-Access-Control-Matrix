@@ -1,3 +1,5 @@
+part of 'access_control_matrix.dart';
+
 /// The database system has three types of users: [user], [securityOfficer],
 /// [administrator].
 enum Role {

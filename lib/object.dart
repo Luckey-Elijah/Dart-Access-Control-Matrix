@@ -1,6 +1,6 @@
-import 'roles.dart';
+part of 'access_control_matrix.dart';
 
-class Object {
+class AcmObject {
   // ---- FIELDS ---- //
 
   /// The name of the object.
@@ -9,26 +9,40 @@ class Object {
   /// The content/data of the object.
   List<String> data = [];
 
-  /// List of [Subject.id]s of the subjects that can execute the object.
+  /// List of [AcmSubject.id]s of the subjects that can execute the object.
   List<int> executors = [];
 
-  /// List of [Subject.id]s of the subjects that control the object.
+  /// List of [AcmSubject.id]s of the subjects that control the object.
   List<int> controllers = [];
 
-  /// List of [Subject.id]s of the subjects that own the object.
+  /// List of [AcmSubject.id]s of the subjects that own the object.
   List<int> owners = [];
+
+  // ---- CONSTRUCTORS ---- //
+
+  AcmObject(
+      this.name, this.data, this.executors, this.controllers, this.owners);
+
+  /// Duplicates an [AcmObject], name required.
+  AcmObject.duplicate(AcmObject object) {
+    name = object.name;
+    data = object.data;
+    executors = object.executors;
+    controllers = object.controllers;
+    owners = object.owners;
+  }
 
   // ---- METHODS ---- //
 
-  /// Removes the given [Subject.id] from [owners] list. Returns [true]
+  /// Removes the given [AcmSubject.id] from [owners] list. Returns [true]
   /// if success, [false] otherwise.
   bool removeOwner(int id) => owners.remove(id);
 
-  /// Removes the given [Subject.id] from [controllers] list. Returns [true]
+  /// Removes the given [AcmSubject.id] from [controllers] list. Returns [true]
   /// if success, [false] otherwise.
   bool removeController(int id) => controllers.remove(id);
 
-  /// Removes the given [Subject.id] from [controllers] list. Returns [true]
+  /// Removes the given [AcmSubject.id] from [controllers] list. Returns [true]
   /// if success, [false] otherwise.
   bool removeExecutor(int id) => executors.remove(id);
 
@@ -51,4 +65,10 @@ class Object {
     }
     return false;
   }
+
+  @override
+  String toString() =>
+      runtimeType.toString() +
+      ': ' +
+      {name, data, executors, controllers, owners}.toString();
 }

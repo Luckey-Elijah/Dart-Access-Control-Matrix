@@ -1,8 +1,6 @@
-import 'subject.dart';
-import 'object.dart';
+part 'subject.dart';
+part 'object.dart';
+part 'roles.dart';
 
-/// Managing the [Subject]s and [Object]s.
-class AccessControlMatrix {
-  List<Subject> subjects;
-  List<Object> objects;
-}
+/// Managing the [AcmSubject]s and [AcmObject]s.
+class AccessControlMatrix {}
