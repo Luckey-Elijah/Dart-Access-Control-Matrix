@@ -13,3 +13,21 @@ enum Role {
   /// [Role.administrator]: Perform the tasks of all the above.
   administrator,
 }
+
+extension Stringify on Role {
+  String string() {
+    var string;
+    switch (this) {
+      case Role.user:
+        string = 'USER';
+        break;
+      case Role.securityOfficer:
+        string = 'SECURITY OFFICER';
+        break;
+      case Role.administrator:
+        string = 'ADMINISTRATOR';
+        break;
+    }
+    return string;
+  }
+}
