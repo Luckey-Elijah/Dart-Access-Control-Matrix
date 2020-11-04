@@ -24,11 +24,6 @@ class AcmSubject extends AcmObject {
   AcmSubject.duplicate(AcmSubject s)
       : super(s.name, s.data, s.executors, s.controllers, s.owners) {
     role = s.role;
-    // name = subject.name;
-    // data = subject.data;
-    // executors = subject.executors;
-    // controllers = subject.controllers;
-    // owners = subject.owners;
     _id = hashCode;
   }
 
@@ -36,8 +31,13 @@ class AcmSubject extends AcmObject {
   int get id => _id;
 
   @override
-  String toString() =>
-      runtimeType.toString() +
-      ': ' +
-      {id, role, name, data, executors, controllers, owners}.toString();
+  String toString() => '''
+Subject:      $name
+role:         ${role.string()}
+id:           $id
+data:         $data
+executors:    $executors
+controllers:  $controllers
+owners:       $owners
+      ''';
 }
