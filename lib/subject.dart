@@ -39,5 +39,8 @@ data:         $data
 executors:    $executors
 controllers:  $controllers
 owners:       $owners
-      ''';
+''';
+
+  @override
+  String shorthand() => '${role.acronym()}: $name';
 }

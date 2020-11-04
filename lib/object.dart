@@ -74,4 +74,6 @@ executors:    $executors
 controllers:  $controllers
 owners:       $owners
 ''';
+
+  String shorthand() => 'O: $name';
 }
