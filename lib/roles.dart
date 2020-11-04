@@ -30,4 +30,20 @@ extension Stringify on Role {
     }
     return string;
   }
+
+  String acronym() {
+    var string;
+    switch (this) {
+      case Role.user:
+        string = 'U';
+        break;
+      case Role.securityOfficer:
+        string = 'SO';
+        break;
+      case Role.administrator:
+        string = 'A';
+        break;
+    }
+    return string;
+  }
 }
