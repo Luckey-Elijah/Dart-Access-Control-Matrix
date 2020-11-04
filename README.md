@@ -1,4 +1,4 @@
-# Access Control Matrix ⌗
+# Access Control Matrix
 
 A simple Dart-implemented ACM.
 
