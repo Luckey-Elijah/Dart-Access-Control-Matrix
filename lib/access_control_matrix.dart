@@ -1,7 +1,10 @@
 import 'dart:io';
+
+import 'dart:math';
 part 'subject.dart';
 part 'object.dart';
 part 'roles.dart';
+part 'const.dart';
 
 /// Managing the [AcmSubject]s and [AcmObject]s.
 class AccessControlMatrix {
@@ -15,6 +18,15 @@ class AccessControlMatrix {
 
   List<AcmObject> get objects => _objects;
   List<AcmSubject> get subjects => _subjects;
+
+  // ---- CONSTRUCTOR ---- //
+
+  // These constructors build a singleton object. All, referencing back to the same instance.
+  AccessControlMatrix._();
+
+  factory AccessControlMatrix() => _acm;
+
+  static final AccessControlMatrix _acm = AccessControlMatrix._();
 
   // ---- METHODS ---- //
 
@@ -39,5 +51,112 @@ class AccessControlMatrix {
     subjects.forEach((subject) => stdout.writeln(subject));
   }
 
-  void printAcm() {}
+  /// Prints the access control matrix in a human-understandable format.
+  ///
+  /// ```text
+  ///┌───────────────┬───────────────┬───────────────┬───────────────┐
+  ///│      ACM      │   object-1    │     Obj-2     │   object-3    │
+  ///├───────────────┼───────────────┼───────────────┼───────────────┤
+  ///│     user-1, U │      r-w      │      -x-      │      rxw      │
+  ///├───────────────┼───────────────┼───────────────┼───────────────┤
+  ///│     user-2, U │      -xw      │      r-w      │      -xw      │
+  ///├───────────────┼───────────────┼───────────────┼───────────────┤
+  ///│  officer-1, O │      --w      │      rx-      │      rx-      │
+  ///├───────────────┼───────────────┼───────────────┼───────────────┤
+  ///│ Officer-02, O │      rx-      │      -x-      │      -xw      │
+  ///├───────────────┼───────────────┼───────────────┼───────────────┤
+  ///│      admin, A │      rx-      │      -x-      │      r-w      │
+  ///└───────────────┴───────────────┴───────────────┴───────────────┘
+  /// ```
+  void printAcm() {
+    if (objects.isEmpty && subjects.isEmpty) {
+      stdout.writeln('The matrix is empty');
+    }
+
+    var rows = subjects.length + 1;
+    var cols = objects.length + 1;
+
+    var matrix = List.generate(rows, (_) => List<String>(cols));
+
+    var width = 3; // Starts with 3 since 'ACM' is "widest"
+
+    // Iterate over rows
+    for (var r = 0; r < rows; r++) {
+      // Iterate over columns
+      for (var c = 0; c < cols; c++) {
+        // This is the first square
+        if (r == 0 && c == 0) {
+          matrix[0][0] = 'ACM';
+        }
+
+        // We know that r_0 is dealing with objects (top row)
+        if (r == 0 && c > 0) {
+          var o = objects[c - 1].shorthand();
+          matrix[0][c] = o;
+          if (o.length > width) width = o.length;
+        }
+
+        // We know that c_0 is dealing with subjects (left column)
+        if (r > 0 && c == 0) {
+          var s = subjects[r - 1].shorthand();
+          matrix[r][0] = s;
+          if (s.length > width) width = s.length;
+        }
+
+        if (r > 0 && c > 0) {
+          var options = ['rxw', 'rx-', 'r-w', 'r--', '-xw', '-x-', '--w'];
+          // TODO: complete the cell data.
+          // Currently generating random information in the cell
+          matrix[r][c] = options[Random().nextInt(options.length)];
+          if (matrix[r][c].length > width) width = matrix[r][c].length;
+        }
+      }
+    }
+
+    // Handles actual printing
+
+    width = width + 2; // addds padding
+    var hline = (Runes.horizontalLine * width);
+
+    for (var r = 0; r < rows; r++) {
+      var line = '';
+      var rowString = '';
+
+      // TOP LINE
+      if (r == 0) {
+        line = Runes.cornerTopLeft +
+            (hline + Runes.wallTop) * (objects.length) +
+            hline +
+            Runes.cornerTopRight;
+        stdout.writeln(line);
+      }
+
+      for (var c = 0; c < cols; c++) {
+        var pSize = width - (matrix[r][c] == null ? 0 : matrix[r][c].length);
+        var lPad = (r > 0 && c == 0) ? pSize - 1 : (pSize ~/ 2);
+        var rPad = pSize - lPad;
+
+        rowString = rowString +
+            Runes.verticalLine +
+            (' ' * lPad) +
+            (matrix[r][c] ?? '') +
+            (' ' * rPad);
+      }
+
+      line = Runes.wallLeft +
+          (hline + Runes.cross) * (cols - 1) +
+          hline +
+          Runes.wallRight;
+      stdout.writeln(rowString + Runes.verticalLine);
+
+      // BOTTOM LINE
+      if (r == rows - 1) {
+        line = Runes.cornerBotLeft +
+            ((hline + Runes.wallBot) * (cols - 1)) +
+            (hline + Runes.cornerBotRight);
+        // break;
+      }
+      stdout.writeln(line);
+    }
+  }
 }
