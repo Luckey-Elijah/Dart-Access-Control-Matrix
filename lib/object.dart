@@ -75,5 +75,5 @@ controllers:  $controllers
 owners:       $owners
 ''';
 
-  String shorthand() => 'O: $name';
+  String shorthand() => name;
 }

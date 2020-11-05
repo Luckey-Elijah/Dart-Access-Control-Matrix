@@ -42,5 +42,5 @@ owners:       $owners
 ''';
 
   @override
-  String shorthand() => '${role.acronym()}: $name';
+  String shorthand() => '$name, ${role.acronym()}';
 }
