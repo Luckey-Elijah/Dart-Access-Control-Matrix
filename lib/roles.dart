@@ -38,7 +38,7 @@ extension Stringify on Role {
         string = 'U';
         break;
       case Role.securityOfficer:
-        string = 'SO';
+        string = 'O';
         break;
       case Role.administrator:
         string = 'A';
