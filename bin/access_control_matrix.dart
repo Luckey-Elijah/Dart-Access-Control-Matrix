@@ -5,17 +5,17 @@ void main(List<String> arguments) {
 
   // Columns
   acm.addObjects([
-    AcmObject('object-1', ['some', 'data'], [], [], []),
+    AcmObject('obj-1', ['some', 'data'], [], [], []),
     AcmObject('Obj-2', ['some', 'data'], [], [], []),
-    AcmObject('object-3', ['some', 'data'], [], [], []),
+    AcmObject('obj-3', ['some', 'data'], [], [], []),
   ]);
 
   // Rows
   acm.addSubjects([
-    AcmSubject(Role.user, 'user-1', ['data'], [], [], []),
-    AcmSubject(Role.user, 'user-2', ['data'], [], [], []),
-    AcmSubject(Role.securityOfficer, 'officer-1', ['data'], [], [], []),
-    AcmSubject(Role.securityOfficer, 'Officer-02', ['data'], [], [], []),
+    AcmSubject(Role.user, 'us-1', ['data'], [], [], []),
+    AcmSubject(Role.user, 'us-2', ['data'], [], [], []),
+    AcmSubject(Role.securityOfficer, 'o-1', ['data'], [], [], []),
+    AcmSubject(Role.securityOfficer, 'Of-02', ['data'], [], [], []),
     AcmSubject(Role.administrator, 'admin', ['data'], [], [], []),
   ]);
 
