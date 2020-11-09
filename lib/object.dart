@@ -34,21 +34,21 @@ class AcmObject {
 
   // ---- METHODS ---- //
 
-  /// Removes the given [AcmSubject.id] from [owners] list. Returns [true]
-  /// if success, [false] otherwise.
+  /// Removes the given [AcmSubject.id] from [owners] list. Returns true
+  /// if success, false otherwise.
   bool removeOwner(int id) => owners.remove(id);
 
-  /// Removes the given [AcmSubject.id] from [controllers] list. Returns [true]
-  /// if success, [false] otherwise.
+  /// Removes the given [AcmSubject.id] from [controllers] list. Returns true
+  /// if success, false otherwise.
   bool removeController(int id) => controllers.remove(id);
 
-  /// Removes the given [AcmSubject.id] from [controllers] list. Returns [true]
-  /// if success, [false] otherwise.
+  /// Removes the given [AcmSubject.id] from [controllers] list. Returns true
+  /// if success, false otherwise.
   bool removeExecutor(int id) => executors.remove(id);
 
   /// Adds the [id] to the appropiate list ([owners], [controllers],
-  /// [executors]) based on the given [authority]. Returns [true] if success,
-  /// [false] otherwise.
+  /// [executors]) based on the given [authority]. Returns true if success,
+  /// false otherwise.
   bool authenticate(int id, Role authority) {
     switch (authority) {
       case Role.user:
