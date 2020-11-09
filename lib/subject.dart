@@ -31,15 +31,7 @@ class AcmSubject extends AcmObject {
   int get id => _id;
 
   @override
-  String toString() => '''
-Subject:      $name
-role:         ${role.string()}
-id:           $id
-data:         $data
-executors:    $executors
-controllers:  $controllers
-owners:       $owners
-''';
+  String toString() => '$id, $name, ${role.acronym()}, $data';
 
   @override
   String shorthand() => '$name, ${role.acronym()}';
