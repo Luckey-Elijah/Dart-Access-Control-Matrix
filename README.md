@@ -4,7 +4,7 @@ A simple Dart-implemented ACM.
 
 ## Design
 
-This section describes the designs and API of this program. All API documents can be found on [its GitHub Pages](https://luckey-elijah.github.io/Dart-Access-Control-Matrix/).
+This section describes the designs and API of this program. All API documents can be found on [its GitHub Pages](https://luckey-elijah.github.io/Dart-Access-Control-Matrix/access_control_matrix/access_control_matrix-library.html).
 
 ### [`Roles`](./lib/roles.dart)
 
