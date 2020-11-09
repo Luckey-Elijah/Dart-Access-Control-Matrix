@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the objects property from the AccessControlMatrix class, for the Dart programming language.">
-  <title>objects property - AccessControlMatrix class - access_control_matrix library - Dart API</title>
+  <meta name="description" content="API docs for the printAcm method from the AccessControlMatrix class, for the Dart programming language.">
+  <title>printAcm method - AccessControlMatrix class - access_control_matrix library - Dart API</title>
 
   
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
@@ -27,9 +27,9 @@
     <li><a href="../../index.html">access_control_matrix</a></li>
     <li><a href="../../access_control_matrix/access_control_matrix-library.html">access_control_matrix</a></li>
     <li><a href="../../access_control_matrix/AccessControlMatrix-class.html">AccessControlMatrix</a></li>
-    <li class="self-crumb">objects property</li>
+    <li class="self-crumb">printAcm method</li>
   </ol>
-  <div class="self-name">objects</div>
+  <div class="self-name">printAcm</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="../../index.html">access_control_matrix</a></li>
       <li><a href="../../access_control_matrix/access_control_matrix-library.html">access_control_matrix</a></li>
       <li><a href="../../access_control_matrix/AccessControlMatrix-class.html">AccessControlMatrix</a></li>
-      <li class="self-crumb">objects property</li>
+      <li class="self-crumb">printAcm method</li>
     </ol>
     
     <h5>AccessControlMatrix class</h5>
@@ -89,23 +89,128 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-property">objects</span> property </h1></div>
+      <div><h1><span class="kind-method">printAcm</span> method </h1></div>
 
+    <section class="multi-line-signature">
+      <span class="returntype">void</span>
+            <span class="name ">printAcm</span>
+(<wbr>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Prints the access control matrix in a human-understandable format.</p>
+<pre class="language-text"><code class="language-text">┌──────────┬──────────┬──────────┬──────────┐
+│   ACM    │  obj-1   │  Obj-2   │  obj-3   │
+├──────────┼──────────┼──────────┼──────────┤
+│  us-1, U │   -xw    │   r--    │   -xw    │
+├──────────┼──────────┼──────────┼──────────┤
+│  us-2, U │   rxw    │   --w    │   r--    │
+├──────────┼──────────┼──────────┼──────────┤
+│   o-1, O │   -x-    │   -xw    │   --w    │
+├──────────┼──────────┼──────────┼──────────┤
+│ Of-02, O │   r-w    │   rxw    │   rx-    │
+├──────────┼──────────┼──────────┼──────────┤
+│ admin, A │   r-w    │   --w    │   rxw    │
+└──────────┴──────────┴──────────┴──────────┘
+</code></pre>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">void printAcm() {
+  if (objects.isEmpty &amp;&amp; subjects.isEmpty) {
+    stdout.writeln(&#39;The matrix is empty&#39;);
+  }
 
-        <section id="getter">
-        
-        <section class="multi-line-signature">
-          <span class="returntype"><a href="https://api.dart.dev/stable/2.10.3/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../access_control_matrix/AcmObject-class.html">AcmObject</a></span>&gt;</span></span>
-                  <span class="name ">objects</span>
-          
-</section>
-        
-                        <section class="summary source-code" id="source">
-          <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">List&lt;AcmObject&gt; get objects =&gt; _objects;</code></pre>
-        </section>
-</section>
-        
+  var rows = subjects.length + 1;
+  var cols = objects.length + 1;
+
+  var matrix = List.generate(rows, (_) =&gt; List&lt;String&gt;(cols));
+
+  var width = 3; &#47;&#47; Starts with 3 since &#39;ACM&#39; is &quot;widest&quot;
+
+  &#47;&#47; Iterate over rows
+  for (var r = 0; r &lt; rows; r++) {
+    &#47;&#47; Iterate over columns
+    for (var c = 0; c &lt; cols; c++) {
+      &#47;&#47; This is the first square
+      if (r == 0 &amp;&amp; c == 0) {
+        matrix[0][0] = &#39;ACM&#39;;
+      }
+
+      &#47;&#47; We know that r_0 is dealing with objects (top row)
+      if (r == 0 &amp;&amp; c &gt; 0) {
+        var o = objects[c - 1].shorthand();
+        matrix[0][c] = o;
+        if (o.length &gt; width) width = o.length;
+      }
+
+      &#47;&#47; We know that c_0 is dealing with subjects (left column)
+      if (r &gt; 0 &amp;&amp; c == 0) {
+        var s = subjects[r - 1].shorthand();
+        matrix[r][0] = s;
+        if (s.length &gt; width) width = s.length;
+      }
+
+      if (r &gt; 0 &amp;&amp; c &gt; 0) {
+        &#47;&#47; TODO: complete the cell data.
+        &#47;&#47; Currently generating random information in the cell
+        var options = [&#39;rxw&#39;, &#39;rx-&#39;, &#39;r-w&#39;, &#39;r--&#39;, &#39;-xw&#39;, &#39;-x-&#39;, &#39;--w&#39;];
+        matrix[r][c] = options[Random().nextInt(options.length)];
+
+        if (matrix[r][c].length &gt; width) width = matrix[r][c].length;
+      }
+    }
+  }
+
+  &#47;&#47; Handles actual printing
+
+  width = width + 2; &#47;&#47; addds padding
+  var hline = (Runes.horizontalLine * width);
+
+  for (var r = 0; r &lt; rows; r++) {
+    var line = &#39;&#39;;
+    var rowString = &#39;&#39;;
+
+    &#47;&#47; TOP LINE
+    if (r == 0) {
+      line = Runes.cornerTopLeft +
+          (hline + Runes.wallTop) * (objects.length) +
+          hline +
+          Runes.cornerTopRight;
+      stdout.writeln(line);
+    }
+
+    for (var c = 0; c &lt; cols; c++) {
+      var pSize = width - (matrix[r][c] == null ? 0 : matrix[r][c].length);
+      var lPad = (r &gt; 0 &amp;&amp; c == 0) ? pSize - 1 : (pSize ~&#47; 2);
+      var rPad = pSize - lPad;
+
+      rowString = rowString +
+          Runes.verticalLine +
+          (&#39; &#39; * lPad) +
+          (matrix[r][c] ?? &#39;&#39;) +
+          (&#39; &#39; * rPad);
+    }
+
+    line = Runes.wallLeft +
+        (hline + Runes.cross) * (cols - 1) +
+        hline +
+        Runes.wallRight;
+    stdout.writeln(rowString + Runes.verticalLine);
+
+    &#47;&#47; BOTTOM LINE
+    if (r == rows - 1) {
+      line = Runes.cornerBotLeft +
+          ((hline + Runes.wallBot) * (cols - 1)) +
+          (hline + Runes.cornerBotRight);
+      &#47;&#47; break;
+    }
+    stdout.writeln(line);
+  }
+}</code></pre>
+    </section>
+
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

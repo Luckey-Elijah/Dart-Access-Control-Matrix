@@ -50,19 +50,26 @@
     <ol>
           <li class="section-title">Libraries</li>
           <li><a href="access_control_matrix/access_control_matrix-library.html">access_control_matrix</a></li>
-          <li><a href="object/object-library.html">object</a></li>
-          <li><a href="roles/roles-library.html">roles</a></li>
-          <li><a href="subject/subject-library.html">subject</a></li>
     </ol>
   </div>
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
       <section class="desc markdown">
-        <h1 id="access-control-matrix-">Access Control Matrix ⌗</h1>
+        <h1 id="access-control-matrix">Access Control Matrix</h1>
 <p>A simple Dart-implemented ACM.</p>
 <h2 id="design">Design</h2>
-<h3 id="object-and-subject">Object and Subject</h3>
-<h3 id="access-control-matrix">Access Control Matrix</h3>
+<p>This section describes the designs and API of this program. All API documents can be found on <a href="https://luckey-elijah.github.io/Dart-Access-Control-Matrix/">its GitHub Pages</a>.</p>
+<h3 id="roleslibrolesdart"><a href="./lib/roles.dart"><code>Roles</code></a></h3>
+<p>The database system has three types of users: <code>user</code>, <code>securityOfficer</code>, <code>administrator</code>.</p>
+<ul>
+<li><code>user</code>: Users who are allowed to perform only DML operations.</li>
+<li><code>securityOfficer</code>: Manges users and passwords. Also, they perform backup and recovery operations.</li>
+<li><code>administrator</code>: Perform the tasks of all the above.</li>
+</ul>
+<h3 id="acmobjectlibobjectdart-and-acmsubjectlibsubjectdart"><a href="./lib/object.dart"><code>AcmObject</code></a> and <a href="./lib/subject.dart"><code>AcmSubject</code></a></h3>
+<p>The <code>AcmSubject</code> class inherits all of the methods and fields of the <code>AcmObject</code> class. There are two fields that are added the <code>AcmSubject</code> class to differentiate it: <code>id</code> and <code>role</code> (<em>described later</em>).</p>
+<h3 id="accesscontrolmatrixlibaccess_control_matrixdart"><a href="./lib/access_control_matrix.dart"><code>AccessControlMatrix</code></a></h3>
+<p>The <code>AccessControlMatrix</code> class is used to control and manage the <code>AcmSubject</code>s and <code>AcmObject</code>s.</p>
       </section>
       
         <section class="summary">
@@ -70,24 +77,6 @@
           <dl>
             <dt id="access_control_matrix">
               <span class="name"><a href="access_control_matrix/access_control_matrix-library.html">access_control_matrix</a></span>             
-            </dt>
-            <dd>
-               
-            </dd>
-            <dt id="object">
-              <span class="name"><a href="object/object-library.html">object</a></span>             
-            </dt>
-            <dd>
-               
-            </dd>
-            <dt id="roles">
-              <span class="name"><a href="roles/roles-library.html">roles</a></span>             
-            </dt>
-            <dd>
-               
-            </dd>
-            <dt id="subject">
-              <span class="name"><a href="subject/subject-library.html">subject</a></span>             
             </dt>
             <dd>
                
