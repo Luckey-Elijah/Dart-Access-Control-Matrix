@@ -3,7 +3,7 @@ import 'dart:math' show Random;
 
 part 'subject.dart';
 part 'object.dart';
-part 'roles.dart';
+part 'role.dart';
 part 'const.dart';
 
 /// Managing the [AcmSubject]s and [AcmObject]s.

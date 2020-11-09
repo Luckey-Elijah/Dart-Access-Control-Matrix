@@ -1,4 +1,5 @@
-import 'package:access_control_matrix/access_control_matrix.dart';
+import 'package:access_control_matrix/access_control_matrix.dart'
+    show Role, Stringify;
 import 'package:test/test.dart';
 
 void main() {
