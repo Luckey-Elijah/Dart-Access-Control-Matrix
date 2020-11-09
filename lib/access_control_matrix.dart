@@ -21,7 +21,7 @@ class AccessControlMatrix {
 
   // ---- CONSTRUCTOR ---- //
 
-  // These constructors build a singleton object. All, referencing back to the same instance.
+  // These constructors build a SINGLETON object - all, referencing back to the same instance.
   AccessControlMatrix._();
 
   factory AccessControlMatrix() => _acm;
@@ -33,22 +33,39 @@ class AccessControlMatrix {
   void addObject(AcmObject object) => _objects.add(object);
   void addSubject(AcmSubject subject) => _subjects.add(subject);
 
-  /// Removes the give [AcmObject]
+  /// Removes the given [AcmObject]. Returns true if succesful;
+  /// otherwise, false.
   bool removeObject(AcmObject object) => _objects.remove(object);
+
+  /// Removes the given [AcmSubject]. Returns true if succesful;
+  /// otherwise, false.
   bool removeSubject(AcmSubject subject) => _subjects.remove(subject);
 
+  /// Attempts to remove subject by the given [id].
   void removeSubjectById(int id) => _subjects.removeWhere((s) => s.id == id);
 
-  void addObjects(List<AcmObject> objects) => _objects.addAll(objects);
-  void addSubjects(List<AcmSubject> subjects) => _subjects.addAll(subjects);
+  /// Adds to the list of [AcmObject]s in bulk.
+  void addObjects(List<AcmObject> objects) {
+    if (objects == null) return;
+    _objects.addAll(objects);
+  }
 
-  void printUsers() {
+  /// Adds to the list of [AcmSubject]s in bulk.
+  void addSubjects(List<AcmSubject> subjects) {
+    if (objects == null) return;
+    _subjects.addAll(subjects);
+  }
+
+  /// Prints the users/subjects stored in the acm. Returns true if there are
+  /// users; otherwise, false.
+  bool printUsers() {
     if (subjects.isEmpty) {
       stdout.writeln('There are no users.');
-      return;
+      return false;
     }
     stdout.writeln('USERS:');
     subjects.forEach((subject) => stdout.writeln(subject));
+    return true;
   }
 
   /// Prints the access control matrix in a human-understandable format.
@@ -104,10 +121,11 @@ class AccessControlMatrix {
         }
 
         if (r > 0 && c > 0) {
-          var options = ['rxw', 'rx-', 'r-w', 'r--', '-xw', '-x-', '--w'];
           // TODO: complete the cell data.
           // Currently generating random information in the cell
+          var options = ['rxw', 'rx-', 'r-w', 'r--', '-xw', '-x-', '--w'];
           matrix[r][c] = options[Random().nextInt(options.length)];
+
           if (matrix[r][c].length > width) width = matrix[r][c].length;
         }
       }
