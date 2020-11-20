@@ -1,7 +1,9 @@
 part of 'access_control_matrix.dart';
 
+/// An [AcmObject] is a resource to which access is controlled. In general,
+/// an [AcmObject] is an entity used to contain and/or receive information
 class AcmObject {
-  // ---- FIELDS ---- //
+  // ==== FIELDS =====//
 
   /// The name of the object.
   String name;
@@ -18,10 +20,15 @@ class AcmObject {
   /// List of [AcmSubject.id]s of the subjects that own the object.
   List<int> owners = [];
 
-  // ---- CONSTRUCTORS ---- //
+  //==== CONSTRUCTORS =====//
 
   AcmObject(
-      this.name, this.data, this.executors, this.controllers, this.owners);
+    this.name,
+    this.data,
+    this.executors,
+    this.controllers,
+    this.owners,
+  );
 
   /// Duplicates an [AcmObject], name required.
   AcmObject.duplicate(AcmObject object) {
@@ -32,7 +39,7 @@ class AcmObject {
     owners = object.owners;
   }
 
-  // ---- METHODS ---- //
+  //===== METHODS =====//
 
   /// Removes the given [AcmSubject.id] from [owners] list. Returns true
   /// if success, false otherwise.

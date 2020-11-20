@@ -16,34 +16,26 @@ enum Role {
 
 extension Stringify on Role {
   String string() {
-    var string;
     switch (this) {
       case Role.user:
-        string = 'USER';
-        break;
+        return 'USER';
       case Role.securityOfficer:
-        string = 'SECURITY OFFICER';
-        break;
+        return 'SECURITY OFFICER';
       case Role.administrator:
-        string = 'ADMINISTRATOR';
-        break;
+        return 'ADMINISTRATOR';
     }
-    return string;
+    return '';
   }
 
   String acronym() {
-    var string;
     switch (this) {
       case Role.user:
-        string = 'U';
-        break;
+        return 'U';
       case Role.securityOfficer:
-        string = 'O';
-        break;
+        return 'O';
       case Role.administrator:
-        string = 'A';
-        break;
+        return 'A';
     }
-    return string;
+    return '';
   }
 }

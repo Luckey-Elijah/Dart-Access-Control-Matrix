@@ -1,5 +1,8 @@
 part of 'access_control_matrix.dart';
 
+/// {@template subject}
+/// An [AcmSubject] is an entity capable of accessing objects.
+/// {@endtemplate}
 class AcmSubject extends AcmObject {
   // ---- FIELDS ---- //
 
@@ -10,6 +13,7 @@ class AcmSubject extends AcmObject {
 
   // ---- CONSTRUCTORS ---- //
 
+  /// {@macro subject}
   AcmSubject(
     this.role,
     String name,
@@ -29,6 +33,26 @@ class AcmSubject extends AcmObject {
 
   /// Identifier of the the [AcmSubject]. Unique number is generted by [hashCode].
   int get id => _id;
+
+  /// This subjects list of rights as provide by their [role].
+  List<AccessRight> get accessRights {
+    switch (role) {
+      case Role.user:
+        return [AccessRight.read, AccessRight.execute];
+      case Role.securityOfficer:
+        return [AccessRight.read, AccessRight.execute, AccessRight.write];
+      case Role.administrator:
+        return [
+          AccessRight.read,
+          AccessRight.execute,
+          AccessRight.write,
+          AccessRight.delete,
+          AccessRight.create,
+        ];
+      default:
+        return [];
+    }
+  }
 
   @override
   String toString() => '$id, $name, ${role.acronym()}, $data';

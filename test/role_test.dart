@@ -3,7 +3,7 @@ import 'package:access_control_matrix/access_control_matrix.dart'
 import 'package:test/test.dart';
 
 void main() {
-  group('Roles print string should be human-readable.', () {
+  group('Roles print string that should be human-readable.', () {
     test('User role string', () {
       final user = Role.user;
       expect(user.string(), 'USER');
@@ -16,9 +16,6 @@ void main() {
       final admin = Role.administrator;
       expect(admin.string(), 'ADMINISTRATOR');
     });
-  });
-
-  group('Roles print acronym should be one letter', () {
     test('User role acronym', () {
       final user = Role.user;
       expect(user.acronym(), 'U');

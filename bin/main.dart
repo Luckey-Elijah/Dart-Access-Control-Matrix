@@ -62,6 +62,59 @@ void main(List<String> arguments) {
         acm.printUsers();
         break;
 
+      // Add User
+      case 3:
+        stdout.writeln('Adding a User (Subject). Select one.');
+
+        for (var role in Role.values) {
+          stdout.writeln('${role.index + 1}. ${role.string()}');
+        }
+
+        stdout.write('\n[OPTION]:');
+        var selected = int.tryParse(stdin.readLineSync());
+
+        var role = Role.values[selected - 1];
+        switch (selected) {
+          case 1:
+            stdout.writeln('Creating ${role.string()}');
+            stdout.write('\nEnter user name: ');
+            var name = stdin.readLineSync();
+            var s = AcmSubject(role, name, null, null, null, null);
+            acm.addSubject(s);
+            stdout.write('created: $s');
+            break;
+          case 2:
+            stdout.writeln('Creating ${role.string()}');
+            stdout.write('\nEnter user name: ');
+            var name = stdin.readLineSync();
+            var s = AcmSubject(role, name, null, null, null, null);
+            acm.addSubject(s);
+            stdout.write('created: $s');
+            break;
+          case 3:
+            stdout.writeln('Creating ${role.string()}');
+            stdout.write('\nEnter user name: ');
+            var name = stdin.readLineSync();
+            var s = AcmSubject(role, name, null, null, null, null);
+            acm.addSubject(s);
+            stdout.write('created: $s');
+            break;
+          default:
+            stdout.writeln('😠 Incorrect option!');
+            break;
+        }
+
+        break;
+
+      // Delete user
+      case 4:
+        stdout.writeln('List of users:');
+        stdout.write(acm.printUsers());
+        stdout.write('\nProvide a users ID to delete:');
+        var id = stdin.readLineSync();
+        acm.removeSubjectById(int.tryParse(id));
+        break;
+
       // The user didn't provide a good option.
       default:
         stdout.writeln('😠 Incorrect option!');

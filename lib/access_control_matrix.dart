@@ -1,6 +1,8 @@
 import 'dart:io' show stdout;
 import 'dart:math' show Random;
 
+import 'package:access_control_matrix/access_right.dart';
+
 part 'subject.dart';
 part 'object.dart';
 part 'role.dart';
@@ -23,9 +25,7 @@ class AccessControlMatrix {
 
   // These constructors build a SINGLETON object - all, referencing back to the same instance.
   AccessControlMatrix._();
-
   factory AccessControlMatrix() => _acm;
-
   static final AccessControlMatrix _acm = AccessControlMatrix._();
 
   // ---- METHODS ---- //
@@ -95,7 +95,7 @@ class AccessControlMatrix {
 
     var matrix = List.generate(rows, (_) => List<String>(cols));
 
-    var width = 3; // Starts with 3 since 'ACM' is "widest"
+    var width = 5; // Starts with 3 since 'ACM' is "widest"
 
     // Iterate over rows
     for (var r = 0; r < rows; r++) {
@@ -125,6 +125,8 @@ class AccessControlMatrix {
           // Currently generating random information in the cell
           var options = ['rxw', 'rx-', 'r-w', 'r--', '-xw', '-x-', '--w'];
           matrix[r][c] = options[Random().nextInt(options.length)];
+
+          // subjects[r].accessRights.
 
           if (matrix[r][c].length > width) width = matrix[r][c].length;
         }
@@ -172,7 +174,6 @@ class AccessControlMatrix {
         line = Runes.cornerBotLeft +
             ((hline + Runes.wallBot) * (cols - 1)) +
             (hline + Runes.cornerBotRight);
-        // break;
       }
       stdout.writeln(line);
     }

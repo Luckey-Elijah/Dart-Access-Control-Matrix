@@ -8,7 +8,7 @@
             "name": "Dart-Access-Control-Matrix",
             "request": "launch",
             "type": "dart",
-            "program": "bin/access_control_matrix.dart"
+            "program": "bin/main.dart"
         }
     ]
 }
