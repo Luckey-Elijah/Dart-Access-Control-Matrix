@@ -2,6 +2,27 @@
 
 A simple Dart-implemented ACM.
 
+## Usage
+
+Must have [Dart SDK](https://dart.dev/get-dart) installed.
+
+```bash
+dart bin/main.dart
+```
+
+Expected prompt:
+```
+👋 Welcome! Pick an option to continue or exit.
+
+0. EXIT
+1. Show ACM
+2. Show users
+3. Add user
+4. Delete User
+5. User database ('CREATE' and 'DROP' supported)
+6. Change user's role.
+```
+
 ## Design
 
 This section describes the designs and API of this program. All API documents can be found on [its GitHub Pages](https://luckey-elijah.github.io/Dart-Access-Control-Matrix/access_control_matrix/access_control_matrix-library.html).
